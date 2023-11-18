@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Admin from "./pages/Admin.jsx";
 import Sidebar from "./components/Sidebar.jsx";
 import Navbar from "./components/Navbar.jsx";
+import { Toaster } from "react-hot-toast";
 function App() {
   const [collapse, setCollapse] = useState(false);
   const [breadcrumb, setBreadcrumb] = useState("Customers");
@@ -22,7 +23,7 @@ function App() {
               />
               <div className={`transition-all duration-200 flex flex-col w-full ${collapse ? 'lg:col-span-11 ' : 'lg:col-span-9 xl:col-span-10 '} col-span-12`}>
                 <Navbar
-                  breadcrumb={breadcrumb}
+                  title={pageTitle}
                   collapse={collapse}
                   setCollapse={setCollapse}
                 />
@@ -34,6 +35,12 @@ function App() {
 
                 </Routes>
               </div>
+              <Toaster
+        toastOptions={{
+          className:
+            "bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white",
+        }}
+      />
             </div>
           }
         />
