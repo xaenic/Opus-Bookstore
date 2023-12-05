@@ -14,7 +14,7 @@ const Sidebar = ({ collapse, setCollapse, setBreadcrumb }) => {
         }  transition-all duration-200 relative hidden lg:block `}
       ></div>
       <div
-        className={` transition-all duration-200 fixed left-[-300px] lg:left-5 h-[95%] bg-gradient-to-t to-slate-800 from-gray-900 rounded-lg   flex flex-col ${
+        className={` transition-all duration-200 top-0 lg:top-5 fixed left-[-300px] lg:left-5 h-[95%] bg-gradient-to-t to-slate-800 from-gray-900 rounded-lg   flex flex-col ${
           collapse ? "left-[-5px] lg:w-[90px]" : ""
         } w-[210px] gap-6 text-white z-[10] `}
       >

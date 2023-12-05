@@ -1,7 +1,28 @@
 import { FaUserSecret } from "react-icons/fa";
 import { IoBookSharp, IoGrid } from "react-icons/io5";
 import { MdFeaturedPlayList } from "react-icons/md";
+import { jwtDecode } from "jwt-decode";
+export const isAuthenticated = () => {
+  const token = localStorage.getItem('token');  
+  try {
+    const decodedToken = jwtDecode(token);
+    console.log(decodedToken.sub.role)
+    return decodedToken && decodedToken.exp * 1000 > Date.now();
+  } catch (error) {
+    return false;
+  }
+};
 
+export const isAdminAuth = () => {
+  const token = localStorage.getItem('token');  
+  try {
+    const decodedToken = jwtDecode(token);
+    return decodedToken.sub.role === 'admin';
+  } catch (error) {
+    return false;
+  }
+};
+export const baseUrl = '192.168.254.110';
 export const menuItems = [
   {
     name: "Customers",

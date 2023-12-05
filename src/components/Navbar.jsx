@@ -2,10 +2,12 @@ import React from "react";
 import { BiMenuAltLeft, BiMenuAltRight } from "react-icons/bi";
 import { MdOutlineArrowForwardIos } from "react-icons/md";
 import avatar from "../assets/avatar.jpg";
+import { Link } from "react-router-dom";
 const Navbar = ({ collapse, setCollapse, title }) => {
+  console.log(title)
   return (
     <>
-      <div className="flex flex-row justify-between items-center bg-gradient-to-r p-3 from-slate-800 to-gray-900 rounded-lg mb-7">
+      <div className="flex flex-row justify-between items-center bg-gradient-to-r p-3 from-slate-800 to-gray-900 rounded-lg mb-4">
         <div className="text-sm flex flex-row gap-3 items-center justify-center">
           {!collapse ? (
             <BiMenuAltLeft
@@ -18,19 +20,20 @@ const Navbar = ({ collapse, setCollapse, title }) => {
               onClick={() => setCollapse((prev) => !prev)}
             />
           )}
-          <span>Admin </span>
-          <MdOutlineArrowForwardIos size={10} className="text-slate-400" />
-          <span className="text-slate-500 text-sm">{title}</span>
+          <Link to="/admin">Admin </Link>
+         {title.split(',').map((e,index)=>(
+          <>
+           <MdOutlineArrowForwardIos size={10} className="text-slate-400" />
+           { title.split(',').length == 1 || index !== 0 ? <span className="text-slate-500 text-sm">{e}</span> : <Link to={`/admin/${e}`} className="text-white text-sm">{e}</Link>}
+          
+          </>
+         ))}
         </div>
         <div>
           <img src={avatar} alt="" className="w-[40px] rounded-full" />
         </div>
       </div>
-      <div className="mb-7 w-full p-3 bg-slate-800 to-gray-900 text-slate-500 rounded-lg">
-        <span className="text-green-500">Create</span>, <span className="text-slate-300">Read</span>,
-        <span className="text-blue-500"> Update</span> and
-        <span className="text-rose-500"> Delete</span> {title} data.
-      </div>
+     
     </>
   );
 };

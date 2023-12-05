@@ -6,6 +6,7 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 import { MdDelete } from "react-icons/md";
 import toast, { Toaster } from "react-hot-toast";
 import GridLoader from "react-spinners/ScaleLoader";
+import { baseUrl } from "../assets/constants";
 const Table = ({ title }) => {
   const controller = new AbortController();
   const signal = controller.signal;
@@ -23,7 +24,7 @@ const Table = ({ title }) => {
   const handleDelete = async () => {
     const toastId = toast.loading("Loading...");
     setDelete(-1);
-    const apiUrl = `http://localhost:5000/delete/${title}/${toDelete}`;
+    const apiUrl = `http://${baseUrl}:5000/delete/${title}/${toDelete}`;
     try {
       const response = await fetch(apiUrl);
       if (!response.ok) throw new Error("Network response was not ok");
@@ -55,7 +56,7 @@ const Table = ({ title }) => {
   }, []);
   const getLists = async (np) => {
     try {
-      const apiUrl = `http://localhost:5000/${title}/${np ? np : page}/10`;
+      const apiUrl = `http://${baseUrl}:5000/${title}/${np ? np : page}/10`;
 
       const response = await fetch(apiUrl, { signal });
 
@@ -138,7 +139,7 @@ const Table = ({ title }) => {
                       className="yawaka cursor-pointer select-none"
                     />
                     <div
-                      class={`z-10 absolute left-[-70px] ${
+                      className={`z-10 absolute left-[-70px] ${
                         index === 9 || index === 8
                           ? "top-[-100px]"
                           : index === 0
@@ -147,20 +148,20 @@ const Table = ({ title }) => {
                       }   rounded-lg shadow w-28 bg-slate-700`}
                     >
                       <ul
-                        class={`${
+                        className={`${
                           active !== e.id ? "hidden" : ""
                         } text-sm text-gray-700 dark:text-gray-200 yawaka p-2`}
                         aria-labelledby="dropdownMenuIconButton"
                       >
                         <li className="text-slate-300 flex flex-col">
-                          <div className="flex items-center flex-row gap-2 hover:bg-gray-600 p-2 rounded-md cursor-pointer">
+                          {/* <div className="flex items-center flex-row gap-2 hover:bg-gray-600 p-2 rounded-md cursor-pointer">
                             <CiRead />
                             <span className="font-semibold">View</span>
-                          </div>
-                          <div className="flex items-center flex-row gap-2 hover:bg-gray-600 p-2 rounded-md cursor-pointer">
+                          </div> */}
+                          <Link  to={`/admin/${title}/edit/${e.id}`}className="flex items-center flex-row gap-2 hover:bg-gray-600 p-2 rounded-md cursor-pointer">
                             <FaEdit />
                             <span className="font-semibold">Edit</span>
-                          </div>{" "}
+                          </Link>{" "}
                           <div
                             onClick={() => {
                               setDelete(e.id);
@@ -179,7 +180,7 @@ const Table = ({ title }) => {
               ))}
             </tbody>
           </table>
-          <div className="w-full bg-gradient-to-l p-3 flex flex-row justify-center items-center to-slate-800 gap-3 from-gray-900">
+          <div className="text-sm sm:text-md w-full bg-gradient-to-l p-3 flex flex-row justify-center items-center to-slate-800 gap-3 from-gray-900">
             <span className="rounded-md hover:bg-slate-900 transition-colors duration-200 cursor-pointer p-2 bg-slate-700">
               Prev
             </span>
