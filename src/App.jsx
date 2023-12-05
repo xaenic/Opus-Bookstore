@@ -6,7 +6,6 @@ import Navbar from "./components/Navbar.jsx";
 import { Toaster } from "react-hot-toast";
 function App() {
   const [collapse, setCollapse] = useState(false);
-  const [breadcrumb, setBreadcrumb] = useState("Customers");
   const [pageTitle, setPageTitle] = useState('Customer')
   return (
     <Router>
@@ -18,7 +17,7 @@ function App() {
               <Sidebar
                 pageTitle={pageTitle}
                 collapse={collapse}
-                setBreadcrumb={setBreadcrumb}
+               
                 setCollapse={setCollapse}
               />
               <div className={`transition-all duration-200 flex flex-col w-full ${collapse ? 'lg:col-span-11 ' : 'lg:col-span-9 xl:col-span-10 '} col-span-12`}>

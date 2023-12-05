@@ -15,7 +15,7 @@ const Sidebar = ({ collapse, setCollapse, setBreadcrumb }) => {
       ></div>
       <div
         className={` transition-all duration-200 fixed left-[-300px] lg:left-5 h-[95%] bg-gradient-to-t to-slate-800 from-gray-900 rounded-lg   flex flex-col ${
-          collapse ? "left-5 lg:w-[90px]" : ""
+          collapse ? "left-[-5px] lg:w-[90px]" : ""
         } w-[210px] gap-6 text-white z-[10] `}
       >
         <div className="border-b-2 border-gray-700 w-full pb-5 pt-5 flex flex-row items-center lg:justify-center justify-around">
