@@ -6,15 +6,24 @@ import NotFound from "./pages/NotFound.jsx";
 import Home from "./pages/Home.jsx";
 import Login from "./pages/Login.jsx";
 import AdminLayout from "./layouts/AdminLayout.jsx";
+import Logout from "./pages/Logout.jsx";
+import {  isAdminAuth, isAuthenticated } from "./assets/constants.jsx";
+import Register from "./pages/Register.jsx";
+
+import CustomerLayout from "./layouts/CustomerLayout.jsx";
+
 function App() {
+  
   return (
     <Router>
       <Routes>
-        <Route path="/admin/*" element={<AdminLayout />} />
+        {isAuthenticated() && isAdminAuth ? (
+          <Route path="/admin/*" element={<AdminLayout />} />
+        ) : null}
+        <Route path="/*" element={<CustomerLayout />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/" element={<Home />} />
-
-        <Route path="*" element={<NotFound />} />
+        <Route path="/logout" element={<Logout />} />
       </Routes>
     </Router>
   );

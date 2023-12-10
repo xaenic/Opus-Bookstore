@@ -5,7 +5,7 @@ import illustration from "../assets/login.png";
 import { baseUrl, isAdminAuth, isAuthenticated } from "../assets/constants";
 import { jwtDecode } from "jwt-decode";
 import toast, { Toaster } from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 const Login = () => {
 
   const navigate = useNavigate();
@@ -42,7 +42,7 @@ const Login = () => {
         localStorage.setItem("token", response.data.access_token);
         toast.success(response.data.message);
 
-        navigate("/admin");
+        navigate("/");
         return;
       }
       toast.error(response.data.message);
@@ -56,14 +56,14 @@ const Login = () => {
   };
 
   return (
-    <div className="flex items-center min-h-screen p-4  lg:justify-center">
+    <div className="bg-white flex items-center min-h-screen p-4  lg:justify-center">
       <Toaster
         toastOptions={{
           className:
             "bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white",
         }}
       />
-      <div className="flex flex-col overflow-hidden  bg-slate-800 rounded-md shadow-lg max md:flex-row md:flex-1 lg:max-w-screen-md">
+      <div className="flex flex-col overflow-hidden  bg-slate-800 rounded-md shadow-2xl max md:flex-row md:flex-1 lg:max-w-screen-md">
         <div className="p-4 py-6 h-full text-slate-800 bg-white md:w-80 md:flex-shrink-0 md:flex md:flex-col md:items-center md:justify-evenly">
           <div className="my-3 text-4xl font-bold tracking-wider text-center">
             <a href="#">Opus</a>
@@ -113,12 +113,7 @@ const Login = () => {
                 >
                   Password
                 </label>
-                <a
-                  href="#"
-                  className="text-sm text-blue-600 hover:underline focus:text-blue-800"
-                >
-                  Forgot Password?
-                </a>
+               
               </div>
               <input
                 type="password"
@@ -127,10 +122,11 @@ const Login = () => {
                 className="px-4 py-2 transition duration-300 border border-gray-300 rounded focus:border-transparent focus:outline-none focus:ring-4 focus:ring-blue-200"
               />
             </div>
-            <div>
+            <div className="flex flex-row justify-between">
+            <Link className='cursor-pointer text-blue-600' to='/register'>Create new account</Link>
               <button
                 type="submit"
-                className="w-full px-4 py-2 text-lg font-semibold text-white transition-colors duration-300 bg-blue-600 rounded-md shadow hover:bg-blue-600 focus:outline-none focus:ring-blue-200 focus:ring-4"
+                className="px-4 py-2 text-lg font-semibold text-white transition-colors duration-300 bg-blue-600 rounded-md shadow hover:bg-blue-600 focus:outline-none focus:ring-blue-200 focus:ring-4"
               >
                 Log in
               </button>
